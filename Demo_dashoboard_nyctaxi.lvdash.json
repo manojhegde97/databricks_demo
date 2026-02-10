@@ -1,0 +1,268 @@
+{
+  "datasets": [
+    {
+      "name": "a044d743",
+      "displayName": "Untitled dataset",
+      "queryLines": [
+        "USE CATALOG `workspace`;\n",
+        "USE SCHEMA `bookstore_eng_pro`;\n",
+        "\n",
+        "-- ============================================\n",
+        "-- BAR CHART : Trips by Distance Category\n",
+        "-- ============================================\n",
+        "-- Purpose: Show distribution of trips by distance ranges\n",
+        "-- X-axis: distance_category\n",
+        "-- Y-axis: trips\n",
+        "-- Title: \"Trips by Distance Category\"\n",
+        "-- Color: #4096B5 (Blue)\n",
+        "\n",
+        "SELECT \n",
+        "  CASE \n",
+        "    WHEN trip_distance < 2 THEN 'Short (< 2 mi)'\n",
+        "    WHEN trip_distance < 5 THEN 'Medium (2-5 mi)'\n",
+        "    WHEN trip_distance < 10 THEN 'Long (5-10 mi)'\n",
+        "    ELSE 'Very Long (10+ mi)'\n",
+        "  END as distance_category,\n",
+        "  COUNT(*) as trips,\n",
+        "  ROUND(AVG(fare_amount), 2) as avg_fare\n",
+        "FROM samples.nyctaxi.trips\n",
+        "WHERE trip_distance > 0 AND trip_distance < 50\n",
+        "GROUP BY 1\n",
+        "ORDER BY trips DESC;"
+      ]
+    },
+    {
+      "name": "f9893411",
+      "displayName": "Untitled dataset",
+      "queryLines": [
+        "USE CATALOG `workspace`;\n",
+        "USE SCHEMA `bookstore_eng_pro`;\n",
+        "\n",
+        "-- ============================================\n",
+        "-- LINE CHART VISUALIZATIONS\n",
+        "-- Dataset: samples.nyctaxi.trips\n",
+        "-- ============================================\n",
+        "\n",
+        "-- ============================================\n",
+        "-- LINE CHART 1: Daily Trip Volume\n",
+        "-- ============================================\n",
+        "-- Purpose: Show trip trends over time (daily)\n",
+        "-- X-axis: pickup_date\n",
+        "-- Y-axis: trips\n",
+        "-- Title: \"Daily Trip Volume\"\n",
+        "-- Line Color: #4096B5 (Blue)\n",
+        "\n",
+        "SELECT \n",
+        "  DATE(tpep_pickup_datetime) as pickup_date,\n",
+        "  COUNT(*) as trips,\n",
+        "  ROUND(AVG(fare_amount), 2) as avg_fare,\n",
+        "  ROUND(SUM(fare_amount), 2) as total_revenue\n",
+        "FROM samples.nyctaxi.trips\n",
+        "WHERE tpep_pickup_datetime IS NOT NULL\n",
+        "GROUP BY DATE(tpep_pickup_datetime)\n",
+        "ORDER BY pickup_date\n",
+        "LIMIT 30;\n",
+        "\n",
+        "\n"
+      ]
+    },
+    {
+      "name": "c2c8eb83",
+      "displayName": "Untitled dataset",
+      "queryLines": [
+        "USE CATALOG `workspace`;\n",
+        "USE SCHEMA `bookstore_eng_pro`;\n",
+        "\n",
+        "-- PIE CHART 3: Trip Distribution by Day of Week\n",
+        "-- ============================================\n",
+        "-- Purpose: Show which days have most trips\n",
+        "-- Labels: day_name\n",
+        "-- Values: trips\n",
+        "-- Title: \"Trips by Day of Week\"\n",
+        "\n",
+        "SELECT \n",
+        "  CASE DAYOFWEEK(tpep_pickup_datetime)\n",
+        "    WHEN 1 THEN 'Sunday'\n",
+        "    WHEN 2 THEN 'Monday'\n",
+        "    WHEN 3 THEN 'Tuesday'\n",
+        "    WHEN 4 THEN 'Wednesday'\n",
+        "    WHEN 5 THEN 'Thursday'\n",
+        "    WHEN 6 THEN 'Friday'\n",
+        "    WHEN 7 THEN 'Saturday'\n",
+        "  END as day_name,\n",
+        "  COUNT(*) as trips\n",
+        "FROM samples.nyctaxi.trips\n",
+        "WHERE tpep_pickup_datetime IS NOT NULL\n",
+        "GROUP BY DAYOFWEEK(tpep_pickup_datetime), 1\n",
+        "ORDER BY DAYOFWEEK(tpep_pickup_datetime);"
+      ]
+    },
+    {
+      "name": "67ea3b73",
+      "displayName": "Untitled dataset",
+      "queryLines": [
+        "USE CATALOG `workspace`;\n",
+        "USE SCHEMA `bookstore_eng_pro`;\n",
+        "\n",
+        "-- PIE CHART 3: Trip Distribution by Day of Week\n",
+        "-- ============================================\n",
+        "-- Purpose: Show which days have most trips\n",
+        "-- Labels: day_name\n",
+        "-- Values: trips\n",
+        "-- Title: \"Trips by Day of Week\"\n",
+        "\n",
+        "SELECT \n",
+        "  CASE DAYOFWEEK(tpep_pickup_datetime)\n",
+        "    WHEN 1 THEN 'Sunday'\n",
+        "    WHEN 2 THEN 'Monday'\n",
+        "    WHEN 3 THEN 'Tuesday'\n",
+        "    WHEN 4 THEN 'Wednesday'\n",
+        "    WHEN 5 THEN 'Thursday'\n",
+        "    WHEN 6 THEN 'Friday'\n",
+        "    WHEN 7 THEN 'Saturday'\n",
+        "  END as day_name,\n",
+        "  COUNT(*) as trips\n",
+        "FROM samples.nyctaxi.trips\n",
+        "WHERE tpep_pickup_datetime IS NOT NULL\n",
+        "GROUP BY DAYOFWEEK(tpep_pickup_datetime), 1\n",
+        "ORDER BY DAYOFWEEK(tpep_pickup_datetime);"
+      ]
+    }
+  ],
+  "pages": [
+    {
+      "name": "47b7aa3e",
+      "displayName": "Untitled Page",
+      "layout": [
+        {
+          "widget": {
+            "name": "34495eac",
+            "queries": [
+              {
+                "name": "82b6feab5df44dd280cae70ec6b5fb53",
+                "query": {
+                  "datasetName": "a044d743",
+                  "fields": [
+                    {
+                      "name": "distance_category",
+                      "expression": "`distance_category`"
+                    },
+                    {
+                      "name": "column_e2d928c5210",
+                      "expression": "SUM(`trips`)"
+                    },
+                    {
+                      "name": "distance_category",
+                      "expression": "`distance_category`"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 0,
+              "viz_spec": {
+                "display_name": "Visualization 1",
+                "viz_type": "CHART",
+                "serialized_options": "{\"isAggregationOn\":true,\"series\":{\"error_y\":{\"type\":\"data\",\"visible\":true},\"stacking\":null},\"coefficient\":1,\"yAxis\":[{\"type\":\"-\"},{\"opposite\":true,\"type\":\"-\"}],\"columnConfigurationMap\":{\"series\":{\"column\":\"distance_category\",\"id\":\"column_e2d928c5211\"},\"x\":{\"column\":\"distance_category\",\"id\":\"column_e2d928c5213\"},\"y\":[{\"column\":\"trips\",\"id\":\"column_e2d928c5210\",\"transform\":\"SUM\"}]},\"alignYAxesAtZero\":true,\"direction\":{\"type\":\"counterclockwise\"},\"swappedAxes\":false,\"percentFormat\":\"0[.]00%\",\"textFormat\":\"\",\"legend\":{\"traceorder\":\"normal\"},\"globalSeriesType\":\"column\",\"version\":2,\"sizemode\":\"diameter\",\"seriesOptions\":{\"column_e2d928c5210\":{\"name\":\"avg_fare\",\"type\":\"column\",\"yAxis\":0}},\"error_y\":{\"type\":\"data\",\"visible\":true},\"sortX\":true,\"showDataLabels\":false,\"missingValuesAsZero\":true,\"useAggregationsUi\":true,\"numberFormat\":\"0,0.[00000]\",\"dateTimeFormat\":\"DD/MM/YYYY HH:mm\",\"sortY\":true,\"valuesOptions\":{},\"xAxis\":{\"labels\":{\"enabled\":true},\"type\":\"-\"}}",
+                "query_name": "82b6feab5df44dd280cae70ec6b5fb53"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 3,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "701def32",
+            "queries": [
+              {
+                "name": "49e16a2b3b9645e1b4bd7889d44ac5e1",
+                "query": {
+                  "datasetName": "f9893411",
+                  "fields": [
+                    {
+                      "name": "pickup_date",
+                      "expression": "`pickup_date`"
+                    },
+                    {
+                      "name": "column_e2d928c5244",
+                      "expression": "SUM(`trips`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 0,
+              "viz_spec": {
+                "display_name": "Visualization 1",
+                "viz_type": "CHART",
+                "serialized_options": "{\"isAggregationOn\":true,\"series\":{\"error_y\":{\"type\":\"data\",\"visible\":true},\"stacking\":null},\"coefficient\":1,\"yAxis\":[{\"type\":\"-\"},{\"opposite\":true,\"type\":\"-\"}],\"columnConfigurationMap\":{\"x\":{\"column\":\"pickup_date\",\"id\":\"column_e2d928c5241\"},\"y\":[{\"column\":\"trips\",\"id\":\"column_e2d928c5244\",\"transform\":\"SUM\"}]},\"alignYAxesAtZero\":true,\"direction\":{\"type\":\"counterclockwise\"},\"swappedAxes\":false,\"percentFormat\":\"0[.]00%\",\"textFormat\":\"\",\"legend\":{\"traceorder\":\"normal\"},\"globalSeriesType\":\"line\",\"version\":2,\"sizemode\":\"diameter\",\"seriesOptions\":{\"column_e2d928c5244\":{\"type\":\"line\",\"yAxis\":0}},\"error_y\":{\"type\":\"data\",\"visible\":true},\"sortX\":true,\"showDataLabels\":false,\"missingValuesAsZero\":true,\"useAggregationsUi\":true,\"numberFormat\":\"0,0.[00000]\",\"dateTimeFormat\":\"DD/MM/YYYY HH:mm\",\"sortY\":true,\"valuesOptions\":{},\"xAxis\":{\"labels\":{\"enabled\":true},\"type\":\"-\"}}",
+                "query_name": "49e16a2b3b9645e1b4bd7889d44ac5e1"
+              }
+            }
+          },
+          "position": {
+            "x": 3,
+            "y": 0,
+            "width": 3,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "96e5efd9",
+            "queries": [
+              {
+                "name": "aa1691c055a74b51bc9f6ff768c5a4f0",
+                "query": {
+                  "datasetName": "67ea3b73",
+                  "fields": [
+                    {
+                      "name": "day_name",
+                      "expression": "`day_name`"
+                    },
+                    {
+                      "name": "column_e2d928c5274",
+                      "expression": "SUM(`trips`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 0,
+              "viz_spec": {
+                "display_name": "Visualization 1",
+                "viz_type": "CHART",
+                "serialized_options": "{\"series\":{\"error_y\":{\"type\":\"data\",\"visible\":true},\"stacking\":null},\"coefficient\":1,\"yAxis\":[{\"type\":\"-\"},{\"opposite\":true,\"type\":\"-\"}],\"columnConfigurationMap\":{\"x\":{\"column\":\"day_name\",\"id\":\"column_e2d928c5273\"},\"y\":[{\"column\":\"trips\",\"id\":\"column_e2d928c5274\",\"transform\":\"SUM\"}]},\"alignYAxesAtZero\":true,\"direction\":{\"type\":\"counterclockwise\"},\"swappedAxes\":false,\"percentFormat\":\"0[.]00%\",\"textFormat\":\"\",\"legend\":{\"traceorder\":\"normal\"},\"globalSeriesType\":\"pie\",\"version\":2,\"sizemode\":\"diameter\",\"seriesOptions\":{\"column_e2d928c5274\":{\"name\":\"trips\",\"type\":\"pie\",\"yAxis\":0}},\"error_y\":{\"type\":\"data\",\"visible\":true},\"sortX\":true,\"showDataLabels\":true,\"missingValuesAsZero\":true,\"useAggregationsUi\":true,\"numberFormat\":\"0,0.[00000]\",\"dateTimeFormat\":\"DD/MM/YYYY HH:mm\",\"sortY\":true,\"valuesOptions\":{},\"xAxis\":{\"labels\":{\"enabled\":true},\"type\":\"-\"}}",
+                "query_name": "aa1691c055a74b51bc9f6ff768c5a4f0"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 6,
+            "width": 6,
+            "height": 6
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_CANVAS"
+    }
+  ],
+  "uiSettings": {
+    "theme": {
+      "widgetHeaderAlignment": "ALIGNMENT_UNSPECIFIED"
+    },
+    "applyModeEnabled": false
+  }
+}
