@@ -4,9 +4,6 @@
       "name": "a044d743",
       "displayName": "Taxi Trip Distances and Fare Analysis",
       "queryLines": [
-        "USE CATALOG `workspace`;\n",
-        "USE SCHEMA `bookstore_eng_pro`;\n",
-        "\n",
         "-- ============================================\n",
         "-- BAR CHART : Trips by Distance Category\n",
         "-- ============================================\n",
@@ -35,9 +32,6 @@
       "name": "f9893411",
       "displayName": "Taxi Trip Counts and Revenue by Day",
       "queryLines": [
-        "USE CATALOG `workspace`;\n",
-        "USE SCHEMA `bookstore_eng_pro`;\n",
-        "\n",
         "-- ============================================\n",
         "-- LINE CHART VISUALIZATIONS\n",
         "-- Dataset: samples.nyctaxi.trips\n",
@@ -70,9 +64,6 @@
       "name": "c2c8eb83",
       "displayName": "Weekly Taxi Trip Patterns",
       "queryLines": [
-        "USE CATALOG `workspace`;\n",
-        "USE SCHEMA `bookstore_eng_pro`;\n",
-        "\n",
         "-- PIE CHART 3: Trip Distribution by Day of Week\n",
         "-- ============================================\n",
         "-- Purpose: Show which days have most trips\n",
@@ -101,9 +92,6 @@
       "name": "67ea3b73",
       "displayName": "Weekly Trip Trends Analysis",
       "queryLines": [
-        "USE CATALOG `workspace`;\n",
-        "USE SCHEMA `bookstore_eng_pro`;\n",
-        "\n",
         "-- PIE CHART 3: Trip Distribution by Day of Week\n",
         "-- ============================================\n",
         "-- Purpose: Show which days have most trips\n",
