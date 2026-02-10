@@ -2,7 +2,7 @@
   "datasets": [
     {
       "name": "a044d743",
-      "displayName": "Untitled dataset",
+      "displayName": "Taxi Trip Distances and Fare Analysis",
       "queryLines": [
         "USE CATALOG `workspace`;\n",
         "USE SCHEMA `bookstore_eng_pro`;\n",
@@ -33,7 +33,7 @@
     },
     {
       "name": "f9893411",
-      "displayName": "Untitled dataset",
+      "displayName": "Taxi Trip Counts and Revenue by Day",
       "queryLines": [
         "USE CATALOG `workspace`;\n",
         "USE SCHEMA `bookstore_eng_pro`;\n",
@@ -68,7 +68,7 @@
     },
     {
       "name": "c2c8eb83",
-      "displayName": "Untitled dataset",
+      "displayName": "Weekly Taxi Trip Patterns",
       "queryLines": [
         "USE CATALOG `workspace`;\n",
         "USE SCHEMA `bookstore_eng_pro`;\n",
@@ -99,7 +99,7 @@
     },
     {
       "name": "67ea3b73",
-      "displayName": "Untitled dataset",
+      "displayName": "Weekly Trip Trends Analysis",
       "queryLines": [
         "USE CATALOG `workspace`;\n",
         "USE SCHEMA `bookstore_eng_pro`;\n",
@@ -139,7 +139,7 @@
             "name": "34495eac",
             "queries": [
               {
-                "name": "82b6feab5df44dd280cae70ec6b5fb53",
+                "name": "main_query",
                 "query": {
                   "datasetName": "a044d743",
                   "fields": [
@@ -148,12 +148,8 @@
                       "expression": "`distance_category`"
                     },
                     {
-                      "name": "column_e2d928c5210",
+                      "name": "sum(trips)",
                       "expression": "SUM(`trips`)"
-                    },
-                    {
-                      "name": "distance_category",
-                      "expression": "`distance_category`"
                     }
                   ],
                   "disaggregated": false
@@ -161,12 +157,35 @@
               }
             ],
             "spec": {
-              "version": 0,
-              "viz_spec": {
-                "display_name": "Visualization 1",
-                "viz_type": "CHART",
-                "serialized_options": "{\"isAggregationOn\":true,\"series\":{\"error_y\":{\"type\":\"data\",\"visible\":true},\"stacking\":null},\"coefficient\":1,\"yAxis\":[{\"type\":\"-\"},{\"opposite\":true,\"type\":\"-\"}],\"columnConfigurationMap\":{\"series\":{\"column\":\"distance_category\",\"id\":\"column_e2d928c5211\"},\"x\":{\"column\":\"distance_category\",\"id\":\"column_e2d928c5213\"},\"y\":[{\"column\":\"trips\",\"id\":\"column_e2d928c5210\",\"transform\":\"SUM\"}]},\"alignYAxesAtZero\":true,\"direction\":{\"type\":\"counterclockwise\"},\"swappedAxes\":false,\"percentFormat\":\"0[.]00%\",\"textFormat\":\"\",\"legend\":{\"traceorder\":\"normal\"},\"globalSeriesType\":\"column\",\"version\":2,\"sizemode\":\"diameter\",\"seriesOptions\":{\"column_e2d928c5210\":{\"name\":\"avg_fare\",\"type\":\"column\",\"yAxis\":0}},\"error_y\":{\"type\":\"data\",\"visible\":true},\"sortX\":true,\"showDataLabels\":false,\"missingValuesAsZero\":true,\"useAggregationsUi\":true,\"numberFormat\":\"0,0.[00000]\",\"dateTimeFormat\":\"DD/MM/YYYY HH:mm\",\"sortY\":true,\"valuesOptions\":{},\"xAxis\":{\"labels\":{\"enabled\":true},\"type\":\"-\"}}",
-                "query_name": "82b6feab5df44dd280cae70ec6b5fb53"
+              "version": 3,
+              "frame": {
+                "title": "Visualization 1",
+                "showTitle": true
+              },
+              "mark": {
+                "layout": "group"
+              },
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "distance_category",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                },
+                "y": {
+                  "fieldName": "sum(trips)",
+                  "displayName": "avg_fare",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "color": {
+                  "fieldName": "distance_category",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                }
               }
             }
           },
