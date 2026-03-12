@@ -264,6 +264,55 @@
         }
       ],
       "pageType": "PAGE_TYPE_CANVAS"
+    },
+    {
+      "name": "dd52f101",
+      "displayName": "Global Filters",
+      "layout": [
+        {
+          "widget": {
+            "name": "c704e273",
+            "spec": {
+              "version": 2,
+              "frame": {
+                "showTitle": true
+              },
+              "widgetType": "filter-single-select",
+              "encodings": {
+                "fields": []
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 12,
+            "width": 1,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "1a528204",
+            "spec": {
+              "version": 2,
+              "frame": {
+                "showTitle": true
+              },
+              "widgetType": "filter-date-range-picker",
+              "encodings": {
+                "fields": []
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 14,
+            "width": 1,
+            "height": 2
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_GLOBAL_FILTERS"
     }
   ],
   "uiSettings": {
